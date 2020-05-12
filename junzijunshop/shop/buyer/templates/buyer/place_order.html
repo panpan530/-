@@ -1,0 +1,158 @@
+{% extends 'buyer/index.html' %}
+{% block title  %}购物车{% endblock %}
+{% block place_order %}
+  {# 顶部开始 #}
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到天天生鲜!</div>
+			<div class="fr">
+                {% if request.user.is_authenticated %}
+                    <div class="login_btn fl">
+                        欢迎您：<em> {{ user.username }}</em>
+                    </div>
+                {% else %}
+                    <div class="login_btn fl">
+                        <a href="/buyer/login/">登录</a>
+                        <span>|</span>
+                        <a href="/buyer/register/">注册</a>
+                    </div>
+                {% endif %}
+				<div class="user_link fl">
+                    <span>|</span>
+					<a href="/buyer/index/">首页</a>
+					<span>|</span>
+					<a href="/buyer/user_center_info/">用户中心</a>
+					<span>|</span>
+					<a href="/buyer/cartlist/">我的购物车</a>
+					<span>|</span>
+					<a href="/buyer/user_center_order/">我的订单</a>
+				</div>
+			</div>
+		</div>
+	</div>
+  {# 顶部结束 #}
+
+ {# 搜索开始 #}
+<div class="search_bar clearfix">
+		<a href="index.html" class="logo fl"><img src="/static/buyer/img/logo.png"></a>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;提交订单</div>
+		<div class="search_con fr">
+            <form action="/buyer/list/" method="get">
+			<input type="text" class="input_text fl" name="key" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" name="" value="搜索">
+            </form>
+		</div>
+	</div>
+  {% endblock %}
+{% block content %}
+	<h3 class="common_title">确认收货地址</h3>
+
+	<div class="common_list_con clearfix">
+		<dl>
+			<dt>寄送到：</dt>
+			<dd><input type="radio" name="" checked="">{{ address.addr }} （{{ address.name }} 收） {{ address.phone }}</dd>
+		</dl>
+		<a href="user_center_site.html" class="edit_site">编辑收货地址</a>
+
+	</div>
+	
+	<h3 class="common_title">支付方式</h3>	
+	<div class="common_list_con clearfix">
+		<div class="pay_style_con clearfix">
+			<input type="radio" name="pay_style" value="1">
+			<label class="cash">货到付款</label>
+			<input type="radio" name="pay_style" value="2">
+			<label class="weixin">微信支付</label>
+			<input type="radio" name="pay_style" checked value="3">
+			<label class="zhifubao"></label>
+			<input type="radio" name="pay_style"  value="4">
+			<label class="bank">银行卡支付</label>
+		</div>
+	</div>
+
+	<h3 class="common_title">商品列表</h3>
+	
+	<div class="common_list_con clearfix">
+		<ul class="goods_list_th clearfix">
+			<li class="col01">商品名称</li>
+			<li class="col02">商品单位</li>
+			<li class="col03">商品价格</li>
+			<li class="col04">数量</li>
+			<li class="col05">小计</li>		
+		</ul>
+        {% for cart in cart_goods_list %}
+		<ul class="goods_list_td clearfix">
+			<li class="col01">{{ forloop.counter }}</li>	{# 计数#}
+			<li class="col02"><img src="/static/buyer/{{ cart.goods.image }}"></li>
+			<li class="col03">{{ cart.goods.name }}</li>
+			<li class="col04">{{ cart.goods.unite }}</li>
+			<li class="col05">{{ cart.goods.price}}元{{ forloop.counter }}</li>
+			<li class="col06">{{ cart.count }}</li>
+			<li class="col07">{% widthratio cart.count 1  cart.goods.price%}元</li>
+		</ul>
+    {% endfor %}
+	</div>
+
+	<h3 class="common_title">总金额结算</h3>
+
+	<div class="common_list_con clearfix">
+		<div class="settle_con">
+			<div class="total_goods_count">共<em>{{ sum_count }}</em>件商品，总金额<b>{{ sum_price }}元</b></div>
+			<div class="transit">运费：<b>{{ yunfei }}元</b></div>
+			<div class="total_pay">实付款：<b>{{ yunfei|add:sum_price }}元</b></div>
+		</div>
+	</div>
+{% csrf_token %}
+	<div class="order_submit clearfix">
+		<a href="javascript:;" id="order_btn" cart_ids = {{ cart_ids }}>提交订单</a>
+	</div>	
+     <div class="popup_con">
+        <div class="popup">
+            <p id="my_msg">订单提交成功！</p>
+        </div>
+        <div class="mask"></div>
+    </div>
+{% endblock %}
+    {% block script %}
+	<script type="text/javascript" src="/static/buyer/js/jquery-1.12.4.js"></script>
+	<script type="text/javascript">
+		$('#order_btn').click(function() {
+{#             提交订单后调用ajax #}
+            $.ajax({
+                url:'/buyer/oder_submit/',
+                type:'post',
+                data:{
+                csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val(),
+                cart_ids:$('#order_btn').attr('cart_ids'),
+                paymethod:$('[name="pay_style"]:checked').val(),
+                address_id:{{ address.id }}
+                },  success: function (data) {
+                    if (data.error == 1) {
+                        $('#my_msg').html('存储不足，下单失败！！！')
+                    }
+                    $('.popup_con').fadeIn('fast', function () {
+                        setTimeout(function () {
+                            $('.popup_con').fadeOut('fast', function () {
+                                location.href = '/buyer/user_center_order/'
+                            });
+                        }, 1000)
+                    });
+                },
+                error:function () {
+                    $('#my_msg').html('服务器维护中，请稍后再试，下单失败！！！')
+                    $('.popup_con').fadeIn('fast', function () {
+                        setTimeout(function () {
+                            $('.popup_con').fadeOut('fast', function () {
+                                location.href = '/buyer/user_center_order/'
+
+                            });
+                        }, 3000)
+                    });
+                }
+            })
+
+		});
+	</script>
+
+
+{% endblock %}

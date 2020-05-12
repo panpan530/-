@@ -1,0 +1,13 @@
+[
+  {
+    "id": 3,
+    "name": "11",
+    "price": 3572.0,
+    "image": "/static/buyer/img/goods.jpg",
+    "number": 3537,
+    "description": "好的很",
+    "store": 1,
+    "sales": 4347,
+    "unite": "500g"
+  }
+]

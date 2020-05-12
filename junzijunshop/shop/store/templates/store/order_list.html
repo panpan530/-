@@ -1,0 +1,207 @@
+{% extends 'store/base.html' %}
+{% block title %}查看商品{% endblock %}
+{% block label %}
+    <style>
+    #a{
+        margin-left: 150px;
+    }
+    </style>
+    <div id="a">订单详情</div>
+
+                            <!-- /input-group -->
+
+{% endblock %}
+
+{% block content %}
+    {# 商品list #}
+    <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {# 搜索框 #}
+                            <form action="/store/list_goods/" method="get">
+                            <div class="input-group custom-search-form col-lg-3">
+                                <input type="text" name="keyword" class="form-control" placeholder="搜索" value="{{ keyword }}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            </form>
+
+                            {# 跳转到 #}
+                        <div class="input-group custom-search-form col-lg-2.8">
+                            <form action="/store/jump/" method="get" >
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input  name="jump" type="search" class="form-control input-sm" placeholder="输入页码" aria-controls="dataTables-example">
+                                        </td>
+                                        <td>
+                                            <input type="submit" value="搜索">
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </form>
+                        </div>
+                    </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>商品名称</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for orderdetail in orderdetail_list %}
+                                            <tr>{% csrf_token %} {{ forloop.counter0 }}
+                                                <td><span > {{ my_page.start_index|add:forloop.counter0}} </span></td>
+                                                <td id="send_goods" orderdetail_id="{{ orderdetail.id }}">{{ orderdetail.goods.name}}</td>
+                                                <td ><a class="btn btn-default zhuangtai"   href="#" orderdetail_id="{{ orderdetail.id }}"  status="{{ orderdetail.order.status }}" >{{ orderdetail.order.get_status_display }}</a></td>
+                                                <td><a class="btn btn-default send"  href="/store/" status="{{ orderdetail.order.status }}" ></a></td>
+                                            </tr>{% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+    </div>
+
+    {# 页码 #}
+     <div class="panel-footer">
+            <div class="row">
+                <div class="col-lg-4">  {# {{ my_page.start_index}}  当前页第一条数据的索引  {{ my_page.end_index}} 当前页最后一条数据的索引 #}
+                    <div class="dataTables_info pagination" id="dataTables-example_info" role="status"
+                         aria-live="polite">Showing第 {{ my_page.start_index}}条数据 to {{ my_page.end_index}} of 总数{{ count }} entries   {{ page_now }}/{{ sum_page }}
+                    </div>
+                </div>
+                <div class="col-lg-8 text-right">
+                    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                        <ul class="pagination">
+                        {# 如果有上一页 #}
+                            {% if my_page.has_previous%}
+                            <li class="paginate_button previous " aria-controls="dataTables-example"
+                                tabindex="0" id="dataTables-example_previous">
+                                <a href="/store/order_list/?page={{ page_now|add:'-1' }}&keyword={{ keyword }}">Previous</a></li>
+                            {% else %} {# 如果没有上一页禁用上一页按钮 #}
+                                <li class="paginate_button previous disabled" aria-controls="dataTables-example"
+                                tabindex="0" id="dataTables-example_previous">
+                                <a href="#" class="my_a_disabed">Previous</a></li>
+                            {% endif %}
+
+                            {# 页码遍历 #}
+                            {% for page in page_range %}
+                                {# 如果是请求页等于当前页，添加背景颜色 #} {# page_now 是字符串时候会出错，不可以比较 #}
+                                {% ifequal page page_now %}
+                                    <li class="paginate_button active" aria-controls="dataTables-example" tabindex="0"><a
+                                            href="/store/order_list/?page={{ page }}&keyword={{ keyword }}">{{ page }}</a></li>
+                                 {% else %}
+                                    <li class="paginate_button" aria-controls="dataTables-example" tabindex="0"><a
+                                            href="/store/order_list/?page={{ page }}&keyword={{ keyword }}">{{ page }}</a></li>
+                                {% endifequal %}
+                            {% endfor %}
+
+                        {# 如果有下一页 #}
+                            {% if my_page.has_next %}
+                                <li class="paginate_button next" aria-controls="dataTables-example" tabindex="0"
+                                    id="dataTables-example_next"><a href="/store/order_list/?page={{ page_now|add:'1' }}&keyword={{ keyword }}">Next</a></li>
+                            {% else %} {# 如果没有下一页禁用按钮 #}
+                                <li class="paginate_button next disabled" aria-controls="dataTables-example" tabindex="0"
+                                    id="dataTables-example_next"><a href="#" class="my_a_disabed">Next</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+
+
+
+
+
+{% block script %}
+    <script>
+       $('.send').each(function () {
+            // 获取支付状态
+            status = $(this).attr('status')
+           console.log(status)
+            if (status == 1) {
+                $(this).text('删除')
+{#                alert('333')#}
+            }else if (status == 2) {
+                $(this).text('发货')
+            }else if (status == 3) {
+                $(this).text('查看物流')
+             }else if (status == 5) {
+                $(this).text('查看评价')
+            }
+        })
+    </script>
+
+
+
+
+
+
+
+
+
+    <script>
+    $('.zhuangtai').click(function () {
+{#        alert('lala')#}
+            status = $(this).attr('status')
+            if (status != 2) {
+                return false
+            }
+            // 获取status
+            status = $(this).attr('status')
+            // 获取订单id
+            orderdetail_id = $(this).attr('orderdetail_id')
+            //获取csrf
+            csrf = $('input[name="csrfmiddlewaretoken"]').val()
+            if (status == 2) { // 进行支付
+                // 发起ajax post请求，访问/order/pay, 传递参数:order_id
+                $.ajax({
+                    url:'/store/order_send/',
+                    type:'post',
+                    data:{
+                        'orderdetail_id': orderdetail_id,
+                        'csrfmiddlewaretoken': csrf
+                    },
+                    success:function () {
+
+                         $('.send').text('查看物流')
+                        $('.zhuangtai').text('待收货')
+                       alert('发货成功')
+                    },
+                    error:function () {
+                        alert('error...')
+                    }
+                })
+            }
+            //阻止a标签的默认单击跳转事件
+            return false
+        })
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+

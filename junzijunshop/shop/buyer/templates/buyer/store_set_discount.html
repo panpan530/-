@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="/static/buyer/js/vue.min.js"></script>
+    <script src="/static/buyer/js/axios.min.js"></script>
+    <script type="text/javascript" src="/static/buyer/js/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+	<div class="r_wrap fr clearfix">
+			<ul class="detail_tab clearfix">
+				<li class="active">商品介绍</li>
+				<li>评论</li>
+			</ul>
+
+			<div class="tab_content">
+				<dl>
+					<dt id="discount">商品详情：</dt>
+                    {# 商品优惠券 #}
+                    <br /><br />
+                    领取优惠？
+                    <dd><a  class="discount1"  href="#">商品折扣 </a></dd>
+                    <dd><a  class="discount2" href="#">商品优惠券</a></dd>
+                    <dd><a  class="discount3" href="#">店铺优惠券</a></dd>
+
+                    <form action="/buyer/store_set_discount/{{ good.id }}" method="get">
+                        <br /><br />
+                    您开启的优惠？
+                    <dd>
+                        <a  class="sdiscount1" href="#">设置商品折扣 </a>
+                        <span>开始时间：<input name="start_time_disco" type="datetime-local"></span>
+                        <span>结束时间：<input  name="end_time_disco" type="datetime-local"></span>
+                    </dd>
+
+                    <dd>
+                        <a  class="sdiscount2" href="#">设置商品优惠券</a>
+                        <span>开始时间：<input name="start_time_goods" type="date" ></span>
+                        <span>结束时间：<input name="end_time_goods" type="datetime-local" ></span>
+
+                    </dd>
+
+                    <dd>
+                        <a  class="sdiscount3" href="#">设置店铺优惠券</a>
+                        <span>开始时间：<input name="start_time_store" type="datetime-local" ></span>
+                        <span>结束时间：<input name="end_time_store" type="datetime-local" ></span>
+
+                    </dd>
+
+                    <dd>
+                        <button>提交</button>
+
+                    </dd>
+
+                    </form>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

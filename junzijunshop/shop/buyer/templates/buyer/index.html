@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>{% block title %}天天生鲜-首页{% endblock %}}</title>
+	<link rel="stylesheet" type="text/css" href="/static/buyer/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/buyer/css/main.css">
+	<script type="text/javascript" src="/static/buyer/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/static/buyer/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/static/buyer/js/slide.js"></script>
+    {% block css %}{% endblock %}
+</head>
+<body>
+   {% block place_order %}
+  {# 顶部开始 #}
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到天天生鲜!</div>
+
+        <div class="welcome fl"></div>
+			<div class="fr">
+                {% if request.user.is_authenticated %}
+                    <div class="login_btn fl">
+                        欢迎您：<em> {{ user.username }}</em>
+                    </div>
+                {% else %}
+                    <div class="login_btn fl">
+                        <a href="/buyer/login/">登录</a>
+                        <span>|</span>
+                        <a href="/buyer/register/">注册</a>
+                    </div>
+                {% endif %}
+				<div class="user_link fl">
+                    <span>|</span>
+					<a href="/buyer/index/">首页</a>
+					<span>|</span>
+					<a href="/buyer/user_center_info/">用户中心</a>
+					<span>|</span>
+					<a href="/buyer/cartlist/">我的购物车</a>
+					<span>|</span>
+					<a href="/buyer/user_center_order/">我的订单</a>
+				</div>
+			</div>
+		</div>		
+	</div>
+  {# 顶部结束 #}
+
+    {# 购物车部分开始 #}
+	<div class="search_bar clearfix">
+		<a href="index.html" class="logo fl"><img src="/static/buyer/img/logo.png"></a>
+		<div class="search_con fl">
+			<form action="/buyer/list/" method="get">
+                <input type="text" class="input_text fl" name="key" placeholder="搜索商品">
+                <input type="submit" class="input_btn fr" value="搜索">
+            </form>
+		</div>
+
+        {% block show_count %}
+		<div class="guest_cart fr">
+			<a href="/buyer/cartlist/" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">{{ cart_goods_cart }}</div>
+		</div>
+        {% endblock %}
+	</div>
+    {# 购物车部分结束#}
+
+
+	<div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分类</h1>
+			<ul class="navlist fl">
+				<li><a href="/buyer/index/">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+  {% endblock %}
+{% block content %}
+	<div class="center_con clearfix">
+		<ul class="subnav fl">
+			<li><a href="#model01" class="fruit">新鲜水果</a></li>
+			<li><a href="#model02" class="seafood">海鲜水产</a></li>
+			<li><a href="#model03" class="meet">猪牛羊肉</a></li>
+			<li><a href="#model04" class="egg">禽类蛋品</a></li>
+			<li><a href="#model05" class="vegetables">新鲜蔬菜</a></li>
+			<li><a href="#model06" class="ice">速冻食品</a></li>
+		</ul>
+		<div class="slide fl">
+			<ul class="slide_pics">
+				<li><img src="/static/buyer/img/slide.jpg" alt="幻灯片"></li>
+				<li><img src="/static/buyer/img/slide02.jpg" alt="幻灯片"></li>
+				<li><img src="/static/buyer/img/slide03.jpg" alt="幻灯片"></li>
+				<li><img src="/static/buyer/img/slide04.jpg" alt="幻灯片"></li>
+			</ul>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<ul class="points"></ul>
+		</div>
+		<div class="adv fl">
+			<a href="#"><img src="/static/buyer/img/adv01.jpg"></a>
+			<a href="#"><img src="/static/buyer/img/adv02.jpg"></a>
+		</div>
+	</div>
+
+    {# 首页列表开始 #}
+{% for goodtype in goodstype %}
+    <div class="list_model">
+        <div class="list_title clearfix">
+            <h3 class="fl" id="model0{{ forloop.counter }}">{{ goodtype.name }}</h3>
+            <div class="subtitle fl">
+                <span>|</span>
+                {% for goodspy in goodtype.four  %}
+                <a href="/buyer/detail/?good_id={{ goodspy.id }}">{{goodspy.name}}</a>
+                {% endfor %}
+            </div>
+            <a href="/buyer/readmore/?goodtype={{ goodtype.id }}" class="goods_more fr" id="fruit_more">查看更多></a>
+        </div>
+
+        <div class="goods_con clearfix">
+            <div class="goods_banner fl"><img src="/static/{{goodtype.picture}}"></div>
+            <ul class="goods_list fl">
+                {% for good in goodtype.three %}
+                <li>
+                    <h4><a href="/buyer/detail/?good_id={{ good.id }}">{{good.name}}</a></h4>
+                    <a href="/buyer/detail/?goods_id={{ good.id }}"><img src="/static/buyer/img/{{good.image}}"></a>
+                    <div class="prize">¥ {{good.price}}0</div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    {% endfor %}
+      {#   猜你喜欢开始     #}
+
+    <div class="list_model">
+            <div class="list_title clearfix">
+                <h3 class="fl" id="model0{{ forloop.counter }}">猜你喜欢</h3>
+                <div class="subtitle fl">
+                    <span>|</span>
+                    <a href="/buyer/readmore/?goodtype={{ goodtype.id }}" class="goods_more fr" id="fruit_more">查看更多></a>
+                </div>
+            </div>
+            <div class="goods_con clearfix">
+                <div class="goods_banner fl"><img src="/static/{{goodtype.picture}}"></div>
+                <ul class="goods_list fl">
+                    {% for goods_views in goods_views_news %}
+                    <li>
+                        <h4><a href="/buyer/detail/?good_id={{ goods_views.id }}">{{goods_views.name}}</a></h4>
+                        <a href="/buyer/detail/?goods_id={{ goods_views.id }}"><img src="/static/buyer/img/{{goods_views.image}}"></a>
+                        <div class="prize">¥ {{goods_views.price}}0</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+        <div class="list_model">
+                <ul class="goods_list fl">
+                    {% for goods_views in goods_views_news %}
+                    <li>
+                        <h4><a href="/buyer/detail/?good_id={{ goods_views.id }}">{{goods_views.name}}</a></h4>
+                        <a href="/buyer/detail/?goods_id={{ goods_views.id }}"><img src="/static/buyer/img/{{goods_views.image}}"></a>
+                        <div class="prize">¥ {{goods_views.price}}0</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {#   猜你喜欢结束    #}
+{% endblock %}
+   {# 首页列表结束 #}
+
+	<div class="footer">
+		<div class="foot_link">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">招聘人才</a>
+			<span>|</span>
+			<a href="#">友情链接</a>
+		</div>
+		<p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>
+		<p>电话：010-****888    京ICP备*******8号</p>
+	</div>
+{% block script %}{% endblock %}}
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <script src="/static/buyer/js/echarts.min.js"></script>
+    <script src="/static/buyer/js/vue.min.js"></script>
+
+{% verbatim %}
+<div id="table" style="width: 500px;height:500px" >
+
+    <input v-model="msg"/>
+    <ul v-if="msg>5">
+        大于5
+    </ul>
+    <ul v-else-if="msg<5">
+        小于5
+    </ul>
+    <ul v-else="msg>5">
+        等于5
+    </ul>
+    <ul v-for="x in book">
+        {{x}}
+    </ul>
+
+    <button @click="add()">+1</button>
+    <button onclick="pie()">饼图</button>
+
+    </div>
+{% endverbatim %}
+
+
+ <script>
+        var root = new Vue({
+            el:'#table',
+            data:{
+                msg:'4',
+                book:[1,2,3]
+            },
+            methods:{
+                add(){this.msg=this.msg+1}
+            }
+
+        })
+
+ </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

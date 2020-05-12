@@ -1,0 +1,67 @@
+{% extends 'store/base.html' %} {# 在base.html基础上修改 #}
+{% block title %}添加商品{% endblock %}
+{% block label %}
+    <div id="a">添加商品</div>
+{% endblock %}
+{% block content %}
+    <div class="col-lg-12">
+        <form action="/store/add_goods/"  method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>商品名称</label>
+                <input class="form-control" name="name">
+            </div>
+            <div class="form-group">
+                <label>价格</label>
+                <input class="form-control" name="price">
+            </div>
+            <div class="form-group">
+                <label>保质期</label>
+                <input  class="form-control" name="shelflife">
+            </div>
+            <div class="form-group">
+                <label>生产日期</label>
+                <input  class="form-control" name="productdate">
+            </div>
+            <div class="form-group">
+                <label>商品图片</label>
+                <input multiple type="file" name="image">
+            </div>
+            <div class="form-group">
+                <label>库存</label>
+                <input class="form-control" name="number">
+            </div>
+            <div class="form-group">
+                <label>商品描述</label>
+                <textarea class="form-control" id="ckeditor_description" rows="3" name="description"></textarea>
+{#                    <textarea cols="40" id="id_description" name="description" rows="10" required data-processed="0" data-config="{&quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;filebrowserWindowHeight&quot;: 725, &quot;filebrowserWindowWidth&quot;: 940, &quot;toolbar&quot;: &quot;Full&quot;, &quot;language&quot;: &quot;en-us&quot;, &quot;width&quot;: 835, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;height&quot;: 291, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;skin&quot;: &quot;moono-lisa&quot;}" data-external-plugin-resources="[]" data-id="id_description" data-type="ckeditortype">&lt;p&gt;resgreg&lt;/p&gt;#}
+{#</textarea>#}
+            </div>
+
+            <div class="form-group">
+                <label>商品类型</label>
+                <select multiple="3" class="form-control" name="goodstype_ids">
+                    {% for goodstype  in goodstype_list %}
+                        <option value="{{ goodstype.id }}" >{{ goodstype.name }}</option>
+                   {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">确定</button>
+            <button type="reset" class="btn btn-default">重置</button>
+        </form>
+    </div>
+
+{% endblock %}
+
+
+{% block css %}{% endblock %}
+{% block script %}
+{#<script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>#}
+<script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+    <script>
+    CKEDITOR.replace("ckeditor_description", {
+    "filebrowserUploadUrl": "/ckeditor/upload/",
+    "filebrowserBrowseUrl": "/ckeditor/browse/"
+});
+    </script>
+{% endblock %}

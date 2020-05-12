@@ -1,0 +1,143 @@
+{% extends 'buyer/index.html' %}
+{% block css %}<script src="/static/buyer/js/vue.min.js"></script>
+               <script src="/static/buyer/js/axios.min.js"></script>
+{% endblock %}
+
+{% block title  %}个人信息{% endblock %}
+  {% block show_count %}
+		<div class="guest_cart fr">
+			<a href="#" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">{{ dic.cart_goods_cart }}</div>
+		</div>
+
+        {% endblock %}
+{% block place_order %}
+    <div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到天天生鲜!</div>
+			<div class="fr">
+                {% if request.user.is_authenticated %}
+                    <div class="login_btn fl">
+                        欢迎您：<em> {{ user.username }}</em>
+                    </div>
+                {% else %}
+                    <div class="login_btn fl">
+                        <a href="/buyer/login/">登录</a>
+                        <span>|</span>
+                        <a href="/buyer/register/">注册</a>
+                    </div>
+                {% endif %}
+				<div class="user_link fl">
+                    <span>|</span>
+					<a href="/buyer/index/">首页</a>
+					<span>|</span>
+					<a href="/buyer/user_center_info/">用户中心</a>
+					<span>|</span>
+					<a href="/buyer/cartlist/">我的购物车</a>
+					<span>|</span>
+					<a href="/buyer/user_center_order/">我的订单</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block content %}
+	<div class="search_bar clearfix">
+		<a href="index.html" class="logo fl"><img src="/static/buyer/images/logo.png"></a>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心</div>
+		<div class="search_con fr">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>
+	</div>
+
+	<div class="main_con clearfix">
+		<div class="left_menu_con clearfix">
+			<h3>用户中心</h3>
+			<ul>
+				<li><a href="/buyer/user_center_info/" >· 个人信息</a>
+                <a href="#"  v-on:click.prevent="select_init()">·xxxxxxxxxx</a></li>
+				<li><a href="/buyer/user_center_order/"  class="active">· 全部订单</a></li>
+				<li><a href="/buyer/user_center_site/" >· 收货地址</a></li>
+			</ul>
+		</div>
+
+{% block right_content  %}
+		<div class="right_content clearfix"   id="history" >
+				<div class="info_con clearfix">
+				<h3 class="common_title2">基本信息</h3>
+						<ul class="user_info_list">
+							<li><span>用户名：</span>18210569700</li>
+							<li><span>联系方式：</span>18210569700</li>
+							<li><span>联系地址：</span>北京市昌平区</li>			
+						</ul>
+				</div>
+				
+				<h3 class="common_title2">最近浏览</h3>
+				<div class="has_view_list" id="history" >
+					<ul class="goods_type_list clearfix">
+                {#        浏览历史开始                #}
+                        <li v-for="goods in list_goods">
+                            <a href="#"><img v-bind:src="[[goods.image]]"></a>
+                            <h4><a href="#">[[goods.name]]</a></h4>
+                            <div class="operate">
+                                <span class="prize">￥[[goods.price]]</span>
+                                <span class="unit">[[goods.unite]]g</span>
+                                <a href="#" class="add_goods" title="加入购物车"></a>
+                            </div>
+                        </li>
+                        <li><span >
+                        <a href="#" v-for="page_num in page_range" v-on:click.prevent= "select_page(page_num)">
+                    [[page_num]]
+                </a>
+                        </span></li>
+                    </ul>
+		</div>
+		</div>
+	</div>
+    {% endblock %}
+{% endblock %}
+
+{% block script  %}
+
+<script>
+
+    new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#history',
+        data: {
+            list_goods: [
+                {id:1,name:'a',pwd:'123456',age:10},
+                {id:2,name:'b',pwd:'123456',age:11},
+            ],
+            page_range: 1,
+        },
+        methods: {
+            select_init: function () {
+                var _this = this
+                axios.get('/buyer/history_api/users/').then(function (response) {
+                    console.log(response)
+                    _this.list_goods = response.data.results
+                    console.log(_this.list_goods)
+                    _this.page_range = Math.ceil(response.data.count/10)
+                })
+            },
+            select_page:function (page_num) {
+                var _this = this
+                axios.get('/buyer/history_api/users/?page='+page_num).then(function (response) {
+                    console.log(response)
+                    console.log(response.data)
+                    console.log(response.data.results)
+                    _this.list_goods = response.data.results
+                })
+            }
+
+        },
+        mounted () {//窗体加载之后运行,相当于js的window.onload
+            this.select_init()
+        }
+    })
+</script>
+
+
+{% endblock %}

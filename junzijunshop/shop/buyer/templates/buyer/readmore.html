@@ -1,0 +1,88 @@
+
+{% extends 'buyer/index.html' %}
+{% block title  %}商品列表{% endblock %}
+  {% block show_count %}
+		<div class="guest_cart fr">
+			<a href="#" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">{{ dic.goods_cart }}</div>
+		</div>
+        {% endblock %}
+
+{% block content %}
+
+{% block type %}
+	<div class="breadcrumb">
+		<a href="#">全部分类</a>
+		<span>></span>
+		<a href="#">{{ goodtype.name }}</a>
+	</div>
+
+	<div class="main_wrap clearfix">
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+				<ul>
+					<li>
+                        {% for good_left in goods_left %}
+						<a href="/buyer/detail/?goods_id={{ good_left.id }}"><img src="/static/media/{{ good_left.image }}"></a>
+						<h4><a href="/buyer/detail/">{{ good_left.name }}</a></h4>
+						<div class="prize">￥{{ good_left.price }}0</div>
+                        {% endfor %}
+                    </li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="r_wrap fr clearfix">
+			<div class="sort_bar">
+				<a href="/buyer/list/?page={{ page }}&keyword={{ keyword }}&sort=1" {% ifequal sort 1 %} class="active" {% endifequal %} value="1">默认</a>
+				<a href="/buyer/list/?page={{ page }}&keyword={{ keyword }}&sort=2" {% ifequal sort 2 %} class="active" {% endifequal %} value="2">价格</a>
+				<a href="/buyer/list/?page={{ page }}&keyword={{ keyword }}&sort=3" {% ifequal sort 3 %} class="active" {% endifequal %} value="3">人气</a>
+			</div>
+
+			<ul class="goods_type_list clearfix">{% for good in list_goods %}
+				<li>
+
+					<a href="/buyer/detail/?goods_id={{ good.id }}"><img src="/static/media/{{  good.image }}"></a>
+					<h4><a href="/buyer/detail/?goods_id={{ good.id }}">{{ good.name }}</a></h4>
+					<div class="operate">
+						<span class="prize">￥{{ good.price }}0</span>
+						<span class="unit">{{ good.price }}/500g</span>
+						<a  href="#" class="add_goods" title="加入购物车"></a>
+					</div>
+
+				</li> {% endfor %}
+			</ul>
+	    </div>
+    </div>
+
+     <div class="pagenation">
+
+            {# 如果有上一页 #}
+                {% if my_page.has_previous%}
+                    <a href="/buyer/readmore/?page={{ page_now|add:'-1' }}&keyword={{ keyword }}&sort={{ sort }}&goodtype={{ goodtype.id }}">Previous</a>
+                {% endif %}
+
+                {# 页码遍历 #}
+                {% for page in page_range %}
+                    {# 如果是请求页等于当前页，添加背景颜色 #} {# page_now 是字符串时候会出错，不可以比较 #}
+                    {% ifequal page page_now %}
+                        <a href="/buyer/readmore/?page={{ page }}&keyword={{ keyword }}&sort={{ sort }}&goodtype={{ goodtype.id }}">{{ page }}</a>
+                     {% else %}
+                           <a href="/buyer/readmore/?page={{ page }}&keyword={{ keyword }}&sort={{ sort }}&goodtype={{ goodtype.id }}">{{ page }}</a>
+                    {% endifequal %}
+                {% endfor %}
+
+            {# 如果有下一页 #}
+                {% if my_page.has_next %}
+                   <a href="/buyer/readmore/?page={{ page_now|add:'1' }}&keyword={{ keyword }}&sort={{ sort }}&goodtype={{ goodtype.id }}">Next</a>
+                {% endif %}
+        </div>
+     </div>
+
+{% endblock %}
+{% endblock %}
+
+
+
+

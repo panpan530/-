@@ -1,0 +1,57 @@
+{% extends 'buyer/user_center_info.html' %}
+
+{% block title  %}收货地址{% endblock %}
+  {% block show_count %}
+		<div class="guest_cart fr">
+			<a href="#" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">{{ dic.cart_goods_cart }}</div>
+		</div>
+        {% endblock %}
+{% block right_content  %}
+		<div class="right_content clearfix">
+				<h3 class="common_title2">收货地址</h3>
+				<div class="site_con">
+					<dl><dt>当前地址：</dt>
+                        {% for addr in addrs %}
+                            {% ifequal addr.isdefault 0 %}
+						        <dd><input type="radio"  name="addr_ture" checked>
+                            {% else %}
+                                <dd><input type="radio"  name="addr_ture">
+                            {% endifequal %}
+                            {{ addr.addr }}({{ addr.name }}收){{ addr.phone }}</dd>
+					</dl>
+                    {% endfor %}
+				</div>
+				<h3 class="common_title2">添加收货地址</h3>
+				<div class="site_con">
+					<form method="post" action="/buyer/user_center_site/">
+                        {% csrf_token %}
+						<div class="form_group">
+							<label>收件人：</label>
+							<input type="text" name="username">
+						</div>
+						<div class="form_group form_group2">
+							<label>详细地址：</label>
+							<textarea class="site_area" name="addr"></textarea>
+						</div>
+						<div class="form_group">
+							<label>邮编：</label>
+							<input type="text" name="password">
+						</div>
+						<div class="form_group">
+							<label>手机：</label>
+							<input type="text" name="phone">
+						</div>
+
+						<input type="submit" name="" value="提交" class="info_submit">
+					</form>
+				</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script  %}
+    <script>
+
+    {{ script|safe }}
+    </script>{% endblock %}

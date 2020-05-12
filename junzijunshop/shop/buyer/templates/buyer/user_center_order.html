@@ -1,0 +1,124 @@
+{% extends 'buyer/user_center_info.html' %}
+  {% block show_count %}
+		<div class="guest_cart fr">
+			<a href="#" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">{{ dic.cart_goods_cart }}</div>
+		</div>
+        {% endblock %}
+{% block right_content  %}
+
+		<div class="right_content clearfix">
+				<h3 class="common_title2">全部订单</h3>
+            {% for order in order_list %}
+				<ul class="order_list_th w978 clearfix">
+					<li class="col01">{{ order.create_time|date:'Y-m-d H:i:s' }}</li>
+					<li class="col02">订单号：{{ order.id }}</li>
+					<li class="col02 stress">{{ order.get_status_display }}</li>
+				</ul>
+
+				<table class="order_list_table w980">
+					<tbody>
+                    {% for orderdetail in order.orderdetail_set.all %}
+						<tr>
+							<td width="55%">
+								<ul class="order_goods_list clearfix">					
+									<li class="col01"><img src="/static/buyer/{{ orderdetail.image }}"></li>
+									<li class="col02">{{ orderdetail.name }}<em>{{ orderdetail.price }}元/{{ orderdetail.unite }}g</em></li>
+									<li class="col03">{{ orderdetail.count }}</li>
+									<li class="col04">{{ orderdetail.price }}元</li>
+								</ul>
+							</td>
+							<td width="15%">{% widthratio  orderdetail.price 1 orderdetail.count %}元</td>
+							<td width="15%">待付款</td>
+                            {% csrf_token %}
+							<td width="15%"><a href="#" status = {{ order.status }} order_id={{ order.id }} class="oper_btn">去支付</a></td>
+						</tr> {% endfor %}
+					</tbody>
+				</table>
+
+            {% endfor %}
+
+         <div class="pagenation">
+
+                    {# 如果有上一页 #}
+                        {% if my_page.has_previous%}
+                            <a href="/buyer/user_center_order/?page_now={{ page_now|add:'-1' }}">Previous</a>
+                        {% endif %}
+
+                        {# 页码遍历 #}
+                        {% for page in page_range %}
+                            {# 如果是请求页等于当前页，添加背景颜色 #} {# page_now 是字符串时候会出错，不可以比较 #}
+                            {% ifequal page page_now %}
+                                <a href="/buyer/user_center_order/?page_now={{ page }}">{{ page }}</a>
+                             {% else %}
+                                   <a href="/buyer/user_center_order/?page_now={{ page }}">{{ page }}</a>
+                            {% endifequal %}
+                        {% endfor %}
+
+                    {# 如果有下一页 #}
+                        {% if my_page.has_next %}
+                           <a href="/buyer/user_center_order/?page_now={{ page_now|add:'1' }}">Next</a>
+                        {% endif %}
+                    </div>
+		    </div>
+		</div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+     $('.oper_btn').each(function () {
+            // 获取支付状态
+            status = $(this).attr('status')
+            if (status == 1) {
+                $(this).text('去支付')
+            } else if (status == 4) {
+                $(this).text('去评价')
+            } else if (status == 5) {
+                $(this).text('已完成')
+            }
+        })
+
+</script>
+
+    <script>
+     $('.oper_btn').click(function () {
+            status = $(this).attr('status')
+            if (status != 1) {
+                return false
+            }
+            // 获取status
+            status = $(this).attr('status')
+            // 获取订单id
+            order_id = $(this).attr('order_id')
+            //获取csrf
+            csrf = $('input[name="csrfmiddlewaretoken"]').val()
+            if (status == 1) { // 进行支付
+                // 发起ajax post请求，访问/order/pay, 传递参数:order_id
+
+                $.ajax({
+                    url:'/buyer/order_pay/',
+                    type:'post',
+                    data:{
+                        'order_id': order_id,
+                        'csrfmiddlewaretoken': csrf
+                    },
+                    success:function (data) {
+                        console.log(data)
+                        if(data.res==2){
+                            location.href = data.pay_url
+                        }else if(data.res==1){
+                            alert(data.msg)
+                        }
+                    },
+                    error:function () {
+                        alert('error...')
+                    }
+                })
+            }
+            //阻止a标签的默认单击跳转事件
+            return false
+        })
+    </script>
+{% endblock %}

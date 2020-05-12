@@ -1,0 +1,388 @@
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T081819.200.json
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T081539.500.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T081455.500.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T081407.500.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T081226.500.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T081147.500.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T081002.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080959.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080911.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080846.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080838.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080742.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080741.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080602.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080423.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080341.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080226.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080143.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080123.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080122.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T080044.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075947.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075912.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075832.404.json
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid/
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075827.404.json
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid/?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&id=22&id=22&id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075705.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&id=22&id=22
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075442.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&id=22&id=22
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075328.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&id=22&id=22
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075306.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&id=22
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075257.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&id=22
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075245.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&id=22
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075215.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&id=22
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075204.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075018.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T075009.404.json
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074812.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074704.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074700.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid/?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074648.200.html
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid/?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid/?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074531.404.json
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074425.404.json
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074424.404.json
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074422.404.json
+
+###
+
+GET http://127.0.0.1:8000/buyer/history_api/users/findgoods_byuserid?buyer_id=3&buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-11-29T074414.404.json
+
+###
+
+GET http://127.0.0.1:8000/history_api/user/findgoods_byuserid?buyer_id=3&buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://127.0.0.1:8000/history_api/user/findgoods_byuserid?buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://127.0.0.1:8000/history_api/findgoods_byuserid?buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://127.0.0.1:8000/history_api/findgoods_byuserid?buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8000/history_api/findgoods_byuserid?buyer_id=3
+Accept: */*
+Cache-Control: no-cache
+
+###
+

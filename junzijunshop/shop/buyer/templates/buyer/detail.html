@@ -1,0 +1,240 @@
+{% extends 'buyer/index.html' %}
+{% block title  %}商品详情{% endblock %}
+{% block show_count %}
+    <div class="guest_cart fr">
+			<a href="#" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">{{ dic.cart_goods_cart }}</div>
+		</div>
+{% endblock %}
+{% block content %}
+
+	<div class="goods_detail_con clearfix">
+{#        {% for good in goods %}#}
+		<div class="goods_detail_pic fl" ><img src="/static/buyer/img/{{ good.image }}"></div>
+
+		<div class="goods_detail_list fr">
+			<h3>{{ good.name }}</h3>
+			<p>{{ good.description|safe}}</p>
+			<div class="prize_bar">
+				<span class="show_pirze">¥<em>{{ good.price }}0</em></span>
+				<span class="show_unit">单  位：500g</span>
+			</div>
+			<div class="goods_num clearfix">
+                <div class="num_name fl">数 量：</div>
+                <div class="num_add fl">
+                    <input type="text" class="num_show fl" value="1">
+                    <a href="javascript:;" class="add fr">+</a>
+                    <a href="javascript:;" class="minus fr">-</a>
+                </div>
+            </div>
+            <div class="total">总价：<em>16.80元</em></div>
+            <div class="operate_btn">
+                <a href="javascript:;" class="buy_btn">立即购买</a>
+                <a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>
+            </div>
+		</div>
+	</div>
+
+	<div class="main_wrap clearfix">
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+            {#   商品详情开始 #}
+				<ul>
+                    {% for  good in  goods_left %}
+					<li id="mama" >
+						<a  href="/buyer/detail/?goods_id={{ good.id }}"><img src="/static/buyer/img/{{ good.image }}"  ></a>
+						<h4><a href="#"></a></h4>
+						<div class="prize">￥{{ good.price }}0</div>
+					</li>
+                    {% endfor %}
+				</ul>
+            {#   商品详情结束 #}
+			</div>
+		</div>
+
+		<div class="r_wrap fr clearfix">
+			<ul class="detail_tab clearfix">
+				<li class="active">商品介绍</li>
+				<li>评论</li>
+			</ul>
+
+			<div class="tab_content">
+				<dl>
+					<dt id="discount">商品详情：</dt>
+                    {# 商品优惠券 #}
+                    <br /><br />
+                    领取优惠？
+                    <dd><a  class="discount1"  href="#">商品折扣 </a></dd>
+                    <dd><a  class="discount2" href="#">商品优惠券</a></dd>
+                    <dd><a  class="discount3" href="#">店铺优惠券</a></dd>
+
+					<dd>{{ good.description }}</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+    <div class="add_jump"></div>
+    {% csrf_token %}
+	 <script type="text/javascript" src="/static/buyer/js/jquery-1.12.4.min.js"></script>
+
+    <script type="text/javascript">
+
+    {#$("＃nowTime").val(nowDate +""+ nowTime)#}
+
+            $('#discount').click(function () {
+            return false
+        })
+         $('.discount1').click(function () {
+            //判断是否登陆
+            {% if not request.user.is_authenticated%}
+                alert('请先登录！！！')
+                //修改当前url
+                window.location.href = '/buyer/login/?next=/buyer/detail/?goods_id={{good.id}}'
+                //结束整个事件
+                return
+            {% endif %}
+            //发送ajax请求
+            $.ajax({
+                url: '/buyer/discount/',//路由
+                type: 'post',//请求方式get,post
+                data: {//参数
+                    csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val(),
+                    goods_id:{{ good.id }}, //detail 渲染过来的，在发给url
+                },
+                success: function (data) {//成功后的回调函数
+                    console.log(data)
+                    $('.discount1').val(data)
+                },
+                error: function () {
+                    alert('异常，请稍后再试试！！！！')
+                }
+            })
+
+        })
+
+
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        //获取#add_cart的左上角位置
+        var $add_x = $('#add_cart').offset().left;
+        var $add_y = $('#add_cart').offset().top;
+        //获取#show_count的左上角的位置
+        var $to_x = $('#show_count').offset().left;
+        var $to_y = $('#show_count').offset().top;
+        //修改小图标的左上角位置
+        $(".add_jump").css({'left': $add_x + 80, 'top': $add_y + 10, 'display': 'block'})
+
+        //单击事件
+        $('#add_cart').click(function () {
+            //判断是否登陆
+            {% if not request.user.is_authenticated%}
+                alert('请先登录！！！')
+                //修改当前url
+                window.location.href = '/buyer/login/?next=/buyer/detail/?goods_id={{good.id}}'
+                //结束整个事件
+                return
+            {% endif %}
+            //发送ajax请求
+            $.ajax({
+                url: '/buyer/add_cart/',//路由
+                type: 'post',//请求方式get,post
+                data: {//参数
+                    csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val(),
+                    goods_id:{{ good.id }}, //detail 渲染过来的，在发给url
+                    count: $('.num_show').val()
+                },
+                success: function (data) {//成功后的回调函数
+                    //先停止目前的未完成的动画，新增新的动画
+                    $(".add_jump").stop().animate({
+                            'left': $to_x + 7,
+                            'top': $to_y + 7
+                        },
+                        "fast", function () {
+                            //小图标淡出
+                            $(".add_jump").fadeOut('fast', function () {
+                                $('#show_count').html(data.goods_count);
+{#                                alert(data.goods_count)#}
+                                //重新设置位置
+                                $(".add_jump").css({'left': $add_x + 80, 'top': $add_y + 10, 'display': 'block'})
+                            });
+                        });
+                },
+                error: function () {
+                    alert('异常，请稍后再试试！！！！')
+                }
+            })
+
+        })
+    </script>
+{% endblock %}
+
+{% block script %}
+    <script  type="text/javascript">
+        // 计算商品的总价格
+        function update_goods_amount() {
+            // 获取商品的单价和数量
+            price = $('.show_pirze').children('em').text()
+            count = $('.num_show').val()
+            // 计算商品的总价
+            price = parseFloat(price)
+            count = parseInt(count)
+            amount = price * count
+            // 设置商品的总价
+            $('.total').children('em').text(amount.toFixed(2) + '元')
+        }
+        // 增加商品的数量
+        $('.add').click(function () {
+            // 获取商品原有的数目
+            count = $('.num_show').val()
+            // 加1
+            count = parseInt(count) + 1
+            if (count >= {{ good.number }}) {
+                count = 1
+            }
+            // 重新设置商品的数目
+            $('.num_show').val(count)
+            // 更新商品的总价
+            update_goods_amount()
+        })
+
+        // 减少商品的数量
+        $('.minus').click(function () {
+            // 获取商品原有的数目
+            count = $('.num_show').val()
+            // 减1
+            count = parseInt(count) - 1
+            if (count <= 0) {
+                count = 1
+            }
+            // 重新设置商品的数目
+            $('.num_show').val(count)
+            // 更新商品的总价
+            update_goods_amount()
+        })
+
+        // 手动输入商品的数量
+        $('.num_show').blur(function () {
+            // 获取用户输入的数目
+            count = $(this).val()
+            // 校验count是否合法
+            if (isNaN(count) || count.trim().length == 0 || parseInt(count) <= 0 || count >{{ good.number }}) {
+                count = 1
+            }
+            // 重新设置商品的数目
+            $(this).val(parseInt(count))
+            // 更新商品的总价
+            update_goods_amount()
+        })
+        //计算商品的总价格
+        update_goods_amount()
+    </script>
+
+
+
+{% endblock %}}

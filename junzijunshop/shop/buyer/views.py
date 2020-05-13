@@ -794,6 +794,9 @@ searchkwtimes = 3              #搜索几次以后就被取为热搜
 
 #  缓存卖家搜索历史
 def rediscacheofkw(request,kw):
+    
+    print("融合到master的测试")
+
     buyerid = request.query_params.get('wxbuyerid')
     if buyerid=="undefined" or kw == "None" or kw == "None":
         return
@@ -803,7 +806,6 @@ def rediscacheofkw(request,kw):
     # 以列表的形式缓存，键是buyerID,列表中存kw,存的时候判断是否已经存在
     kwlistofbuyer = cache.get(buyerid)
     # 判断，如果有缓存，使用，如果没有缓存，查询然后缓存，再使用
-    print("test")
     if kwlistofbuyer:
         print('添加历史搜索之前', kwlistofbuyer)
         if len(kwlistofbuyer) > 10:

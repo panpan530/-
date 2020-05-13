@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e28db324-f0f6-49c6-b10a-18119cad4093" name="Default" comment="" />
+    <list default="true" id="e28db324-f0f6-49c6-b10a-18119cad4093" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buyer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buyer/views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +30,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/django-rest-framework" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectId" id="1SmrwaHrNepf3HH5bRiPUMVezIn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -614,13 +618,13 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Django server.shop" />
       <item itemvalue="JavaScript Debug.haha.html" />
       <item itemvalue="JavaScript Debug.tb.html" />
-      <item itemvalue="npm.run" />
-      <item itemvalue="Python.my_test" />
       <item itemvalue="Python.middleware" />
+      <item itemvalue="Python.my_test" />
       <item itemvalue="Python.testmy" />
+      <item itemvalue="Django server.shop" />
+      <item itemvalue="npm.run" />
     </list>
     <recent_temporary>
       <list>
@@ -691,6 +695,11 @@
       <workItem from="1587876631263" duration="12331000" />
       <workItem from="1588246159343" duration="15447000" />
       <workItem from="1589194188951" duration="3720000" />
+<<<<<<< Updated upstream
+      <workItem from="1589335764360" duration="687000" />
+=======
+      <workItem from="1589335764360" duration="71000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -712,9 +721,9 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/shop___$my_test.coverage" NAME="my_test Coverage Results" MODIFIED="1574165615556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/shopff$middleware.coverage" NAME="middleware Coverage Results" MODIFIED="1574410994303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/my_middleware" />
     <SUITE FILE_PATH="coverage/shopff$testmy.coverage" NAME="testmy Coverage Results" MODIFIED="1589246475913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:/" />
     <SUITE FILE_PATH="coverage/shopff$my_test.coverage" NAME="my_test Coverage Results" MODIFIED="1574862034898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/shop___$tests.coverage" NAME="tests Coverage Results" MODIFIED="1574137339520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/store" />
-    <SUITE FILE_PATH="coverage/shopff$middleware.coverage" NAME="middleware Coverage Results" MODIFIED="1574410994303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/my_middleware" />
   </component>
 </project>

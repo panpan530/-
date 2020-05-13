@@ -803,7 +803,6 @@ def rediscacheofkw(request,kw):
     # 以列表的形式缓存，键是buyerID,列表中存kw,存的时候判断是否已经存在
     kwlistofbuyer = cache.get(buyerid)
     # 判断，如果有缓存，使用，如果没有缓存，查询然后缓存，再使用
-    print("test")
     if kwlistofbuyer:
         print('添加历史搜索之前', kwlistofbuyer)
         if len(kwlistofbuyer) > 10:

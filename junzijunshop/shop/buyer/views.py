@@ -796,7 +796,6 @@ searchkwtimes = 3              #搜索几次以后就被取为热搜
 def rediscacheofkw(request,kw):
     buyerid = request.query_params.get('wxbuyerid')
     print(buyerid,"@@@@@@@@@@@@@@@@@@@@@@")
-    print(buyerid)
     if buyerid=="undefined" or kw == "None" or kw == "None":
         return
     # 记一下全部的kw用来做热搜

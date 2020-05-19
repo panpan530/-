@@ -26,7 +26,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/django-rest-framework" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectId" id="1SmrwaHrNepf3HH5bRiPUMVezIn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -691,6 +691,7 @@
       <workItem from="1587876631263" duration="12331000" />
       <workItem from="1588246159343" duration="15447000" />
       <workItem from="1589194188951" duration="3720000" />
+      <workItem from="1589369179733" duration="353000" />
     </task>
     <servers />
   </component>

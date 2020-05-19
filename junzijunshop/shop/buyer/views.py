@@ -932,7 +932,7 @@ class GoodsViewSet(viewsets.ModelViewSet):
                 if v > searchkwtimes:
                     lskw.append(k)
             cache.set("sorthotkw12", lskw, hotkwtime)
-
+        print('add')
         sorthotkw = cache.get("sorthotkw12")
         return Response(sorthotkw)
 
